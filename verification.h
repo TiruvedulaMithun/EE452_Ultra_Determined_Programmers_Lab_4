@@ -5,10 +5,10 @@ using namespace std;
 static int SEQ_BITS = 32;
 static int BLOCK_SIZE = 2; // measured in bytes
 
-short createChecksum()//char * text)
+ushort createChecksum()//char * text)
 {
-    uint sum;
-    int total_bytes, checksum;
+    ushort sum, carry, checksum, tmp;
+    int total_bytes;
     char * text = "hello";
     char block [BLOCK_SIZE * 8];
 
@@ -21,10 +21,14 @@ short createChecksum()//char * text)
         for(int j = 0; j < BLOCK_SIZE; j++) {
             if(sizeof(text) > i * BLOCK_SIZE + j)
             {
-                sum += (text[i*BLOCK_SIZE+j] << 8*j);
+                tmp = (text[i*BLOCK_SIZE+j] << 8*j);
+                carry += (sum + tmp) << 16;
+                sum += tmp;
+                printf("%d", carry);
             }
         }
     }
+    checksum = !sum + 1;
     printf("%d", checksum);
 
     // return checksum;

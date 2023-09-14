@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in from;
     char buf[1024], response[100];
 
-    if (argc < 2) {
+    if (argc ) {
         fprintf(stderr, "ERROR, no port provided\n");
         exit(0);
     }

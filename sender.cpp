@@ -81,27 +81,21 @@ void sendPacket()
 
 void * receiveACK(void * arg)
 {
-    struct sockaddr_in from;
     char * data;
     unsigned int length;
     int n;
 
-    while(1)
-    {
-        printf("here");
-        n=recvfrom(send_sock, data, 256, 0, (struct sockaddr *)&from, &length);
-        // n=recvfrom(recv_sock, data, 256, 0, (struct sockaddr *)&from, &length);
-        if (n < 0) {
-            printf("Unable to use recvfrom");
-            exit(0);
-        }
-        
-        printf("%s", data);
-        if(data != NULL) {
-            break;
-        }
-        
+    n=read(send_sock, data, 256);
+    if (n < 0) {
+        printf("Unable to use recvfrom");
+        exit(0);
     }
+    
+    printf("%s", data);
+    if(data != NULL) {
+        break;
+    }
+        
     return 0;
 }
 
@@ -112,18 +106,13 @@ int main(int argc, char *argv[])
     struct hostent *receiver_ip;
     char * buffer;
 
-    if (argc != 4) {
+    if (argc != 3) {
         fprintf(stderr, "ERROR, missing information. Please use the following format.\n \
-./custom_ftp <receiving_hostname> <receiving_port> <local_filepath_to_transfer>\n");
+./custom_ftp <sending_port> <local_filepath_to_transfer>\n");
         exit(0);
     }
     
     //Parse command line arguments
-    receiver_ip = gethostbyname(argv[1]);
-    if (receiver_ip==0) {
-        printf("Unknown host");
-        exit(0);
-    }
     receiver_port = atoi(argv[2]);
     filepath = argv[3];
     
@@ -139,18 +128,22 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
-    recv_sock = socket(AF_INET, SOCK_DGRAM, 0);
+    recv_sock = socket(AF_INET, SOCK_STREAM, 0);
     if (recv_sock < 0) {
         printf("Unable to create UDP socket for receiving ACKs");
         exit(0);
     }
-    recv_sock = listen(recv_sock, backlog);
-
-    send_threads = new pthread_t[NUM_THREADS];
-    recv_threads = new pthread_t[NUM_THREADS];
 
     receiver.sin_family = AF_INET;
     receiver.sin_port = htons(receiver_port);
+    if (bind(sockfd, (struct sockaddr *) &serv_addr,
+              sizeof(serv_addr)) < 0) 
+              error("ERROR on binding");
+     listen(sockfd,5);
+     clilen = sizeof(cli_addr);
+     newsockfd = accept(sockfd, 
+                 (struct sockaddr *) &cli_addr, 
+                 &clilen);
     
     sendPacket();
     

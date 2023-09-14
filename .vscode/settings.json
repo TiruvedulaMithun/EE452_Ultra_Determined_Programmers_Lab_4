@@ -2,6 +2,10 @@
     "files.associations": {
         "mutex": "cpp",
         "xstring": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "sstream": "cpp"
     }
 }
