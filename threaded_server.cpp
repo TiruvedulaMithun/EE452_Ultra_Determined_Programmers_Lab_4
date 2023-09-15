@@ -16,20 +16,11 @@
 #include <queue>
 
 #include "verification.h"
+#include "packet.h"
 
 using namespace std;
 
-static  int NUM_THREADS = 1;
-static int RECIEVER = 10;
-static int LINE_SIZE = 1400; // TODO set a reasonable line size
 const static int MAX_QUEUE_SIZE = 1000;
-const static int PACKET_SIZE = 1500;
-
-// Define a structure for a packet
-typedef struct {
-    char data[PACKET_SIZE];
-    int packet_num;
-} Packet;
 
 // Define a structure for a thread's arguments
 typedef struct {
@@ -43,9 +34,12 @@ typedef struct {
     int queue_rear;
 } ThreadData;
 
+static  int NUM_THREADS = 1;
+static int RECIEVER = 10;
+queue<Packet> ack_queue;
+
 void initRequestHandler(string buffer, ThreadData * udp_queues, int num_threads){
-    // initialize ack queue
-    queue<Packet> ack_queue; //TODO Malloc? 
+    ack_queue = new queue<Packet>(); //TODO Malloc? (TM)
 
     // parse list of open ports
     string ports = buffer;
@@ -65,20 +59,20 @@ void initRequestHandler(string buffer, ThreadData * udp_queues, int num_threads)
     // create udp sockets
     int udp_sockets[num_threads];
     for (int i = 0; i < num_threads; i++) {
-        udp_sockets[i] = socket(AF_INET, SOCK_DGRAM, 0); //TODO give IP of client 
+        udp_sockets[i] = socket(AF_INET, SOCK_DGRAM, 0); //TODO give IP of client (TM)
         if (udp_sockets[i] < 0) {
             perror("Error creating socket");
             exit(EXIT_FAILURE);
         }
-        udp_sockets[i].sin_family = AF_INET; // TODO check if this is correct
-        udp_sockets[i].sin_addr.s_addr = INADDR_ANY; // TODO check if this is correct
+        udp_sockets[i].sin_family = AF_INET; // TODO check if this is correct (TM)
+        udp_sockets[i].sin_addr.s_addr = INADDR_ANY; // TODO check if this is correct (TM)
         udp_sockets[i].sin_port = open_ports[i];
 
         // TODO might not have to do it here
-        if(bind(udp_sockets[i], (struct sockaddr *)&udp_sockets[i], sizeof(udp_sockets[i])) < 0) {
-            perror("Error binding socket");
-            exit(EXIT_FAILURE);
-        }
+        // if(bind(udp_sockets[i], (struct sockaddr *)&udp_sockets[i], sizeof(udp_sockets[i])) < 0) {
+        //     perror("Error binding socket");
+        //     exit(EXIT_FAILURE);
+        // }
     }
 
     // set up ThreadData
@@ -104,7 +98,7 @@ void initRequestHandler(string buffer, ThreadData * udp_queues, int num_threads)
     // initialize loader thread to read file add to udp queue
     int j = 0;
     pthread_t loader_thread;
-    j = pthread_create(&loader_thread, NULL, loaderThread, (void*) filepath, (void*) udp_queues); //TODO match parameters 
+    j = pthread_create(&loader_thread, NULL, loaderThread, (void*) filepath, (void*) udp_queues); //TODO create struct to pass multiple params (BP)
     if (j) {
         printf("Loader thread could not be created.\n");
     }
@@ -140,6 +134,25 @@ void *workerThreadCreated(void *arg) {
     }
 }
 
+//TODO implement (TM)
+int getSequenceNum(Packet * packet) {
+    return 1;
+}
+
+void formatPacket(Packet * packet) {
+    char * tmp = new char [LINE_SIZE];
+    unsigned char * checksum = new unsigned char [BLOCK_SIZE];
+
+    strcat(tmp, ":");
+    strcat(tmp, to_string(packet->packet_num).c_str());
+    strcat(tmp, ";");
+    strcat(tmp, packet->payload);
+    createChecksum(tmp, checksum);
+
+    strcat(packet->data, (char*) checksum);
+    strcat(packet->data, tmp);
+}
+
 void *loaderThread(void *arg, void *num_threads, void* filepath, void* line_size) {
     FILE *file = fopen((char*)filepath, "r");
     if (file == NULL) {
@@ -151,9 +164,9 @@ void *loaderThread(void *arg, void *num_threads, void* filepath, void* line_size
     char line[*(int*)line_size];
 
     while (fgets(line, sizeof(line), file) != NULL) {
-        // TODO Create a packet from the file data
         Packet packet;
-        strncpy(packet.data, line, sizeof(packet.data));
+        strncpy(packet.payload, line, sizeof(packet.payload));
+        formatPacket(&packet);
 
         // Round-robin distribution of packets to worker threads
         pthread_mutex_lock(&threads[current_thread].mutex);
@@ -177,28 +190,28 @@ void *loaderThread(void *arg, void *num_threads, void* filepath, void* line_size
 }
 
 void ackRequestHandler(string buffer){
-    // TODO parse buffer to get packet number
+    // TODO parse buffer to get packet number (test TM)
     int packet_num = 0;
     string rest_of_message = buffer.substr(4);
     stringstream ss(rest_of_message);
     ss >> packet_num;
 
-    // TODO remove packet from ack queue
+    // TODO remove packet from ack queue (TM) NOTE: May not pop the correct packet
     while (ack_queue.front().packet_num != packet_num) {
         ack_queue.pop();
     }
 }
 
 void nackRequestHandler(string buffer){
-    // TODO parse buffer to get packet number
+    // TODO parse buffer to get packet number (test TM)
     int packet_num = 0;
     string rest_of_message = buffer.substr(5);
     stringstream ss(rest_of_message);
     ss >> packet_num;
 
-    // TODO add packet to 
+    // TODO add packet to (TM)
     while (ack_queue.front().packet_num != packet_num) {
-        // TODO add packet to udp queue
+        // TODO add packet to udp queue (TM)
 
     }
 }
@@ -221,14 +234,11 @@ void *receieveHandler(void *socket_desc, void* filepath, void* udp_queues) {
     string message_type = buffer;
     // if message type starts with "get" then it is a get request
     if (message_type.substr(0, 4) == "init") { // Client sent "init 5001,5002,5003,5004"
-        // TODO handle init request
         ThreadData *udp_queues = new ThreadData[num_threads];
         initRequestHandler(buffer, udp_queues, num_threads);
     } else if (message_type.substr(0, 3) == "ack") { // Client sent "ack 24"
-        // TODO handle put request
         ackRequestHandler(buffer);
     } else  if (message_type.substr(0, 4) == "nack") { // Client sent "nack 24"
-        // TODO handle put request
         nackRequestHandler(buffer);
     }        
     

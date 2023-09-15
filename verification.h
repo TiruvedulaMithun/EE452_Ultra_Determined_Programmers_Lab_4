@@ -23,7 +23,7 @@ void createChecksum(char * text,  unsigned char * checksum)
             if(strlen(text) > i * BLOCK_SIZE + j)
             {
                 sum += ((text[i*BLOCK_SIZE+j] & 0x00ff) << (8*(BLOCK_SIZE-1-j)));
-                printf("%c    %x    %x\n", text[i*BLOCK_SIZE+j], (text[i*BLOCK_SIZE+j] & 0xff), sum);
+                // printf("%c    %x    %x\n", text[i*BLOCK_SIZE+j], (text[i*BLOCK_SIZE+j] & 0xff), sum);
             }
         }
     }
@@ -36,9 +36,7 @@ void createChecksum(char * text,  unsigned char * checksum)
         sum = (sum & mask) + (sum >> (8*BLOCK_SIZE));
     }
 
-    printf("Final sum%x\n", sum);
     checksum_full =  (~sum + 1) & mask;
-    printf("Full:%x\n", checksum_full);
 
     for(int y = 0; y < BLOCK_SIZE ; y++) {
         checksum[y] = 0;
@@ -60,7 +58,6 @@ bool verifyChecksum(char * text)
             if(strlen(text) > i * BLOCK_SIZE + j)
             {
                 sum += ((text[i*BLOCK_SIZE+j] & 0xff) << (8*(BLOCK_SIZE-1-j)));
-                printf("%c    %d    %x\n", text[i*BLOCK_SIZE+j], 8*(BLOCK_SIZE-1-j), sum);
             }
         }
     }
@@ -73,7 +70,6 @@ bool verifyChecksum(char * text)
         sum = (sum & mask) + (sum >> (8*BLOCK_SIZE));
     }
 
-    printf("Final sum%x", sum);
     if ((sum & mask) == 1) {
         return true;
     }
