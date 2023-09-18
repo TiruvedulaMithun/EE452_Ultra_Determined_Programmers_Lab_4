@@ -4,11 +4,9 @@ using namespace std;
 
 static int BLOCK_SIZE = 2; // measured in bytes
 
-void createChecksum(char * text,  unsigned char * checksum)
+int createChecksum(char * text)
 {
-    unsigned int sum, mask, checksum_full;
-    int total_bytes;
-    char block [BLOCK_SIZE * 8];
+    unsigned int sum, mask;
 
     int num_blocks = (int) strlen(text) / BLOCK_SIZE;
     if(strlen(text) % BLOCK_SIZE != 0) {
@@ -36,28 +34,39 @@ void createChecksum(char * text,  unsigned char * checksum)
         sum = (sum & mask) + (sum >> (8*BLOCK_SIZE));
     }
 
-    checksum_full =  (~sum + 1) & mask;
-
-    for(int y = 0; y < BLOCK_SIZE ; y++) {
-        checksum[y] = 0;
-        checksum[y] = (unsigned char) (checksum_full >> (8*(BLOCK_SIZE-1-y))) & 0x00ff;
-    }
+    return (int)((~sum + 1) & mask);
 }
 
 bool verifyChecksum(char * text)
 {
+    int checksum, index;
+    unsigned int sum;
+    const char * array;
+    string tmp = text;
     unsigned int mask = 0;
-    unsigned int sum = 0;
     int num_blocks = (int) strlen(text) / BLOCK_SIZE;
     if(strlen(text) % BLOCK_SIZE != 0) {
         num_blocks++;
     }
 
+    index = tmp.find_first_of(':');
+    try
+    {
+        checksum = stoi(tmp.substr(0,index));
+        array = tmp.substr(index).c_str();
+    }
+    catch(const std::exception& e)
+    {
+        return false;
+    }
+    
+    sum = (unsigned int) checksum;
+
     for(int i = 0; i < num_blocks; i++) {
         for(int j = 0; j < BLOCK_SIZE; j++) {
-            if(strlen(text) > i * BLOCK_SIZE + j)
+            if(strlen(array) > i * BLOCK_SIZE + j)
             {
-                sum += ((text[i*BLOCK_SIZE+j] & 0xff) << (8*(BLOCK_SIZE-1-j)));
+                sum += ((array[i*BLOCK_SIZE+j] & 0xff) << (8*(BLOCK_SIZE-1-j)));
             }
         }
     }
