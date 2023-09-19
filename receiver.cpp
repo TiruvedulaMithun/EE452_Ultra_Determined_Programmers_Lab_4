@@ -131,21 +131,23 @@ int main(int argc, char *argv[])
             exit(0);
         }
 
-        // printf("New message: %s\n", buf);
+        //printf("New message: %s\n", buf);
         readPacket(buf, &packet);
         if(packet.packet_num < 0) {
             continue;
         }
+        //printf("Pack:%d\n", packet.packet_num);
+        //printf("Packet %d has been acked: %d\n", packet.packet_num, acked[packet.packet_num]);
         if((init) && (acked[packet.packet_num] == true)){
             continue;
         }
-        // printf("Pack:%d\n", packet.packet_num);
-
+        //printf("New message: %s\n", buf);
+        //printf("Checksum good? %d\n", verifyChecksum(buf));
         if(verifyChecksum(buf)) {
             strcpy(response, "ACK ");
             strcat(response, to_string(packet.packet_num).c_str());
 
-            // printf("Send: %s\n\n", response);
+            printf("Send: %s\n\n", response);
             n = write(tcp_sock, response, 17);//, 0, (struct sockaddr *)&tcp_server, fromlen);
             if (n < 0) {
                 printf("Unable to use send");
@@ -159,7 +161,7 @@ int main(int argc, char *argv[])
                 for(int j = 0; j < num_packets; j++) {
                     payloads[j] = new char[LINE_SIZE];
                 }
-                for(int j = 0; j <= num_packets; j++) {
+                for(int j = 0; j <= num_packets; j++){
                     acked[j] = false;
                 }
                 acked[0] = true;
@@ -167,19 +169,19 @@ int main(int argc, char *argv[])
                 next_packet = 1;
             }
             else if (init & (packet.packet_num > 0)) {
-                // printf("Pay#%d:%s\n", packet.packet_num, packet.payload);
+                //printf("Pay#%d:%s\n", packet.packet_num, packet.payload);
                 acked[packet.packet_num] = true;
-                
-                // printf("new: %d, expecting:%d", packet.packet_num, next_packet);
+
+                //printf("new: %d, expecting:%d", packet.packet_num, next_packet);
                 strcpy(payloads[packet.packet_num - 1], packet.payload);
             }
         }
         done = init;
 //        printf("num:%d", num_packets);
-        for(int x = 0; x < num_packets; x++) {
+        for(int x = 0; x <= num_packets; x++) {
             done &= acked[x];
         }
-        
+
         memset(response, '\0', sizeof(response));
     }
     file.open(filepath);
