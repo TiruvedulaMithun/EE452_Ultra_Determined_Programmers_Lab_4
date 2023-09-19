@@ -136,6 +136,9 @@ int main(int argc, char *argv[])
         if(packet.packet_num < 0) {
             continue;
         }
+        if((init) && (acked[packet.packet_num] == true)){
+            continue;
+        }
         // printf("Pack:%d\n", packet.packet_num);
 
         if(verifyChecksum(buf)) {
@@ -152,17 +155,20 @@ int main(int argc, char *argv[])
             if ((!init) & (packet.packet_num == 0)) {
                 num_packets = stoi(packet.payload);
                 payloads = new char*[num_packets];
-                acked = new bool[num_packets];
+                acked = new bool[num_packets+1];
                 for(int j = 0; j < num_packets; j++) {
                     payloads[j] = new char[LINE_SIZE];
+                }
+                for(int j = 0; j <= num_packets; j++) {
                     acked[j] = false;
                 }
+                acked[0] = true;
                 init = true;
                 next_packet = 1;
             }
             else if (init & (packet.packet_num > 0)) {
                 // printf("Pay#%d:%s\n", packet.packet_num, packet.payload);
-                acked[packet.packet_num - 1] = true;
+                acked[packet.packet_num] = true;
                 
                 // printf("new: %d, expecting:%d", packet.packet_num, next_packet);
                 strcpy(payloads[packet.packet_num - 1], packet.payload);
