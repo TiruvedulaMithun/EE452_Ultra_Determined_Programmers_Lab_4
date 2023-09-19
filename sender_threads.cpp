@@ -44,7 +44,10 @@ void readFile(string filepath, char ** buffer)
         file.seekg(0, file.end);
         file_size = file.tellg();
         file.seekg(0, file.beg);
-        *buffer = (char*) malloc(sizeof(char) * file_size);
+        *buffer = (char*) malloc((sizeof(char) * file_size)+1);
+        for (int i = 0; i < file_size; i++) {
+            (*buffer)[i] = '\0'; // Set each element to null character
+        }
         file.read (*buffer, file_size);
         file.close();
     }
@@ -52,13 +55,15 @@ void readFile(string filepath, char ** buffer)
         printf("Could not open %s", filepath.c_str());
         exit(0);
     }
+    //printf("File size: %d\n", file_size);
+    //printf("Malloc size: %lu\n", sizeof(char)*file_size);
 }
 
 void createPacketPayloads(char * buffer) {
     num_packets = ceil((double)strlen(buffer)/LINE_SIZE);
 
     payloads = new char *[num_packets];
-    
+
     for(int i = 0; i < num_packets; i++) {
         payloads[i] = new char [LINE_SIZE];
         for(int j = 0; j < LINE_SIZE; j++) {
@@ -96,7 +101,7 @@ void * sendPacket(void * arg)
     bool init = true;
     int acks = 0;
     int num_p = num_packets;
-    
+
 
     strcpy(packet.payload, to_string(num_packets).c_str());
     packet.packet_num = 0;
@@ -115,12 +120,15 @@ void * sendPacket(void * arg)
         acks = 0;
         for(int i = 1; i <= num_p; i++)
         {
+            //printf("Current packet num: %d\n", i);
+
             mtx[i].lock();
             if(pay_trans_state[i] != 2) {
                 strcpy(packet.payload, payloads[i-1]);
                 packet.packet_num = i;
                 memset(packet.data, '\0', sizeof(packet.data));
                 formatPacket(&packet);
+                //printf("%s\n", packet.data);
                 for(int j = 0; j < DUPLICATES; j++) {
                     n = sendto(send_sock, packet.data, sizeof(packet.data), 0, (const struct sockaddr *)&client,length);
                     if (n < 0) {
@@ -136,7 +144,7 @@ void * sendPacket(void * arg)
             mtx[i].unlock();
         }
     }
-    
+
     return NULL;
 }
 
@@ -154,11 +162,11 @@ void * receiveACK(void * arg)
         memset(data, '\0', sizeof(data));
         n = read(new_recv_sock, data, sizeof(data));//, 0, (struct sockaddr *)&cli_addr, &length);
         tmp = data;
-        
+
         if (strlen(data) > 4){
             if (tmp.substr(0, 4) == "ACK "){
                 packet_num = stoi(tmp.substr(4));
-                
+
                 mtx[packet_num].lock();
                 if (pay_trans_state[packet_num] != 2) {
                     acks++;
@@ -197,7 +205,7 @@ int main(int argc, char *argv[])
 ./custom_ftp_sender <client_ip> <udp_port_num> <tcp_port_num> <local_filepath_to_transfer>\n");
         exit(0);
     }
-    
+
     //Parse command line arguments
     clientIP = argv[1];
     udp_port = atoi(argv[2]);
@@ -223,12 +231,12 @@ int main(int argc, char *argv[])
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(tcp_port);
 
-    if (bind(recv_sock, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) 
+    if (bind(recv_sock, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
         printf("ERROR on binding");
     listen(recv_sock,5);
     clilen = sizeof(cli_addr);
     new_recv_sock = accept(recv_sock, (struct sockaddr *) &cli_addr, &clilen);
-    if (new_recv_sock < 0) 
+    if (new_recv_sock < 0)
         printf("ERROR on accept");
 
     // if (inet_ntop(AF_INET, &(cli_addr.sin_addr), clientIP, INET_ADDRSTRLEN) == NULL) {
@@ -237,7 +245,7 @@ int main(int argc, char *argv[])
     // }
 
     cli_ip = gethostbyname(clientIP);
-        
+
     //Create UDP sockets
     send_sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (send_sock < 0) {
@@ -247,18 +255,18 @@ int main(int argc, char *argv[])
     client.sin_family = AF_INET;
     bcopy((char *)cli_ip->h_addr, (char *)&client.sin_addr, cli_ip->h_length);
     client.sin_port = htons(udp_port);
-    
+
     while(!start) {
         j = read(new_recv_sock, data, 256);//, 0, (struct sockaddr *)&cli_addr, &length);
         tmp = data;
-            
+
         if(tmp.substr(0, 5) == "Start") {
             start = true;
         }
     }
-    
+
     for (int i = 0; i  < NUM_THREADS; ++i) {
-    	j = 0;
+        j = 0;
         j = pthread_create(&recv_threads[i], NULL, &receiveACK, (void*) &udp_port);
         if (j) {
             printf("A request can't be procceses.\n");
@@ -271,6 +279,6 @@ int main(int argc, char *argv[])
         pthread_join(send_threads[i], NULL);
         pthread_join(recv_threads[i], NULL);
     }
-    
+
     return 0;
 }
