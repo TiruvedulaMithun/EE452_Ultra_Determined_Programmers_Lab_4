@@ -1,606 +1,606 @@
-==2081== Memcheck, a memory error detector
-==2081== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==2081== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==2081== Command: ./custom_ftp_sender 10.0.1.135 51717 51718 hello.txt
-==2081== Parent PID: 916
-==2081==
---2081--
---2081-- Valgrind options:
---2081--    --leak-check=full
---2081--    --show-leak-kinds=all
---2081--    --track-origins=yes
---2081--    --verbose
---2081--    --log-file=valgrind-out.txt
---2081-- Contents of /proc/version:
---2081--   Linux version 5.15.0-1043-aws (buildd@lcy02-amd64-046) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #48~20.04.1-Ubuntu SMP Wed Aug 16 18:26:32 UTC 2023
---2081--
---2081-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---2081-- Page sizes: currently 4096, max supported 4096
---2081-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---2081-- Reading syms from /home/ubuntu/Server/custom_ftp_sender
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---2081--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
---2081--   .. build-id is valid
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---2081--    object doesn't have a symbol table
---2081--    object doesn't have a dynamic symbol table
---2081-- Scheduler: using generic scheduler lock implementation.
---2081-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==2081== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-2081-by-ubuntu-on-???
-==2081== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-2081-by-ubuntu-on-???
-==2081== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-2081-by-ubuntu-on-???
-==2081==
-==2081== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==2081== don't want to do, unless you know exactly what you're doing,
-==2081== or are doing some strange experiment):
-==2081==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=2081 ...command...
-==2081==
-==2081== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==2081==   /path/to/gdb ./custom_ftp_sender
-==2081== and then give GDB the following command
-==2081==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=2081
-==2081== --pid is optional if only one valgrind process is running
-==2081==
---2081-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---2081-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---2081--    object doesn't have a symbol table
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---2081--    object doesn't have a symbol table
-==2081== WARNING: new redirection conflicts with existing -- ignoring it
---2081--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---2081--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---2081-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---2081-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
---2081--    object doesn't have a symbol table
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/libm-2.31.so
---2081--   Considering /usr/lib/debug/.build-id/fe/91b4090ea04c1559ff71dd9290062776618891.debug ..
---2081--   .. build-id is valid
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
---2081--    object doesn't have a symbol table
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
---2081--   Considering /usr/lib/debug/.build-id/7b/4536f41cdaa5888408e82d0836e33dcf436466.debug ..
---2081--   .. build-id is valid
---2081-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---2081--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
---2081--   .. build-id is valid
---2081-- REDIR: 0x4c61480 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60780 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c617b0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c600a0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c607e0 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c62c50 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7dce0 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7d820 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c615e0 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61410 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60710 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60150 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61540 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7d7e0 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60670 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60230 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61800 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c601d0 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7ef50 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7d860 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60820 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60100 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60630 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c69bb0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61850 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c613d0 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c7d930 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c60ae0 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c61750 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c616f0 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c62c90 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4c618a0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---2081-- REDIR: 0x4d49500 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
---2081-- REDIR: 0x4c5b0e0 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---2081-- REDIR: 0x4d496d0 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
---2081-- REDIR: 0x4d4c6e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
---2081-- REDIR: 0x4d45cc0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
---2081-- REDIR: 0x4d44bd0 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
---2081-- REDIR: 0x4c60fa0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---2081-- REDIR: 0x48fcb70 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x483c510 (operator new[](unsigned long))
---2081-- REDIR: 0x48fad90 (libstdc++.so.6:operator delete[](void*)) redirected to 0x483d6e0 (operator delete[](void*))
---2081-- REDIR: 0x4c5b6d0 (libc.so.6:free) redirected to 0x483c9d0 (free)
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AFF8: createPacketPayloads(char*) (sender_threads.cpp:60)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==  Address 0x5804948 is 0 bytes after a block of size 6,605,064 alloc'd
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AF1A: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
-==2081==    by 0x10BA55: main (sender_threads.cpp:212)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x10B0E2: createPacketPayloads(char*) (sender_threads.cpp:67)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==  Address 0x5804948 is 0 bytes after a block of size 6,605,064 alloc'd
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AF1A: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
-==2081==    by 0x10BA55: main (sender_threads.cpp:212)
-==2081==
---2081-- REDIR: 0x4d49310 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
---2081-- REDIR: 0x4d4c6c0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
---2081-- REDIR: 0x4c5cb10 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---2081-- REDIR: 0x4d45530 (libc.so.6:__memchr_avx2) redirected to 0x4840050 (memchr)
---2081-- REDIR: 0x4d47720 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
---2081-- REDIR: 0x4d45010 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
---2081-- REDIR: 0x4d44960 (libc.so.6:__strpbrk_sse42) redirected to 0x4843da0 (strpbrk)
---2081-- REDIR: 0x4d490e0 (libc.so.6:__strchr_avx2) redirected to 0x483ebf0 (index)
---2081-- REDIR: 0x4d4cb60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
---2081-- REDIR: 0x4d4ac10 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
-==2081== Thread 3:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B141: formatPacket(Packet*) (sender_threads.cpp:77)
-==2081==    by 0x10B36B: sendPacket(void*) (sender_threads.cpp:105)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B36B: sendPacket(void*) (sender_threads.cpp:105)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
---2081-- REDIR: 0x4d49b90 (libc.so.6:__strcat_avx2) redirected to 0x483ec20 (strcat)
---2081-- REDIR: 0x48fcb10 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x483bdf0 (operator new(unsigned long))
---2081-- REDIR: 0x48fad60 (libstdc++.so.6:operator delete(void*)) redirected to 0x483cf50 (operator delete(void*))
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B3CC: sendPacket(void*) (sender_threads.cpp:109)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081== Thread 2:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B7D9: receiveACK(void*) (sender_threads.cpp:168)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081== Thread 3:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B4B7: sendPacket(void*) (sender_threads.cpp:123)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x483F0B2: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B4EC: sendPacket(void*) (sender_threads.cpp:124)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x4dd5808 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B096: createPacketPayloads(char*) (sender_threads.cpp:65)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B141: formatPacket(Packet*) (sender_threads.cpp:77)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid write of size 1
-==2081==    at 0x483EC4C: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B1DB: formatPacket(Packet*) (sender_threads.cpp:80)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid write of size 1
-==2081==    at 0x483EC5E: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B1DB: formatPacket(Packet*) (sender_threads.cpp:80)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87bb is 3 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10A9A3: createChecksum(char*) (verification.h:11)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10A9BB: createChecksum(char*) (verification.h:12)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AA17: createChecksum(char*) (verification.h:21)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x10AA4C: createChecksum(char*) (verification.h:23)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== Invalid read of size 1
-==2081==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B245: formatPacket(Packet*) (sender_threads.cpp:84)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== More than 10000000 total errors detected.  I'm not reporting any more.
-==2081== Final error counts will be inaccurate.  Go fix your program!
-==2081== Rerun with --error-limit=no to disable this cutoff.  Note
-==2081== that errors may occur in your program without prior warning from
-==2081== Valgrind, because errors are no longer being displayed.
-==2081==
-==2081==
-==2081== HEAP SUMMARY:
-==2081==     in use at exit: 20,063,015 bytes in 9,446 blocks
-==2081==   total heap usage: 9,465 allocs, 19 frees, 20,155,982 bytes allocated
-==2081==
-==2081== Searching for pointers to 9,446 not-freed blocks
-==2081== Checked 30,360,880 bytes
-==2081==
-==2081== Thread 1:
-==2081== 8 bytes in 1 blocks are still reachable in loss record 1 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BB46: main (sender_threads.cpp:218)
-==2081==
-==2081== 8 bytes in 1 blocks are still reachable in loss record 2 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BB77: main (sender_threads.cpp:219)
-==2081==
-==2081== 179 bytes in 1 blocks are definitely lost in loss record 3 of 13
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x4C5FF54: __libc_alloc_buffer_allocate (alloc_buffer_allocate.c:26)
-==2081==    by 0x4D03628: alloc_buffer_allocate (alloc_buffer.h:143)
-==2081==    by 0x4D03628: __resolv_conf_allocate (resolv_conf.c:411)
-==2081==    by 0x4D00E21: __resolv_conf_load (res_init.c:592)
-==2081==    by 0x4D03232: __resolv_conf_get_current (resolv_conf.c:163)
-==2081==    by 0x4D013D4: __res_vinit (res_init.c:614)
-==2081==    by 0x4D025CF: maybe_init (resolv_context.c:122)
-==2081==    by 0x4D025CF: context_get (resolv_context.c:184)
-==2081==    by 0x4D025CF: context_get (resolv_context.c:176)
-==2081==    by 0x4D025CF: __resolv_context_get (resolv_context.c:195)
-==2081==    by 0x4CF163F: gethostbyname (getXXbyYY.c:105)
-==2081==    by 0x10BCA2: main (sender_threads.cpp:244)
-==2081==
-==2081== 288 bytes in 1 blocks are possibly lost in loss record 4 of 13
-==2081==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x40149DA: allocate_dtv (dl-tls.c:286)
-==2081==    by 0x40149DA: _dl_allocate_tls (dl-tls.c:532)
-==2081==    by 0x4BA7322: allocate_stack (allocatestack.c:622)
-==2081==    by 0x4BA7322: pthread_create@@GLIBC_2.2.5 (pthread_create.c:660)
-==2081==    by 0x10BE2E: main (sender_threads.cpp:267)
-==2081==
-==2081== 288 bytes in 1 blocks are possibly lost in loss record 5 of 13
-==2081==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x40149DA: allocate_dtv (dl-tls.c:286)
-==2081==    by 0x40149DA: _dl_allocate_tls (dl-tls.c:532)
-==2081==    by 0x4BA7322: allocate_stack (allocatestack.c:622)
-==2081==    by 0x4BA7322: pthread_create@@GLIBC_2.2.5 (pthread_create.c:660)
-==2081==    by 0x10BE7C: main (sender_threads.cpp:272)
-==2081==
-==2081== 1,400 bytes in 1 blocks are possibly lost in loss record 6 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== 1,400 bytes in 1 blocks are definitely lost in loss record 7 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B36B: sendPacket(void*) (sender_threads.cpp:105)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== 18,876 bytes in 1 blocks are still reachable in loss record 8 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081== 37,744 bytes in 1 blocks are still reachable in loss record 9 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B057: createPacketPayloads(char*) (sender_threads.cpp:62)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==
-==2081== 188,760 bytes in 1 blocks are still reachable in loss record 10 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAF1: main (sender_threads.cpp:216)
-==2081==
-==2081== 6,603,800 bytes in 4,717 blocks are definitely lost in loss record 11 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== 6,605,064 bytes in 1 blocks are still reachable in loss record 12 of 13
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AF1A: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
-==2081==    by 0x10BA55: main (sender_threads.cpp:212)
-==2081==
-==2081== 6,605,200 bytes in 4,718 blocks are still reachable in loss record 13 of 13
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B096: createPacketPayloads(char*) (sender_threads.cpp:65)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==
-==2081== LEAK SUMMARY:
-==2081==    definitely lost: 6,605,379 bytes in 4,719 blocks
-==2081==    indirectly lost: 0 bytes in 0 blocks
-==2081==      possibly lost: 1,976 bytes in 3 blocks
-==2081==    still reachable: 13,455,660 bytes in 4,724 blocks
-==2081==         suppressed: 0 bytes in 0 blocks
-==2081==
-==2081== ERROR SUMMARY: 10000006 errors from 21 contexts (suppressed: 0 from 0)
-==2081==
-==2081== 1 errors in context 1 of 21:
-==2081== Thread 2:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B7D9: receiveACK(void*) (sender_threads.cpp:168)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081==
-==2081== 1 errors in context 2 of 21:
-==2081== Thread 3:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B3CC: sendPacket(void*) (sender_threads.cpp:109)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081==
-==2081== 1 errors in context 3 of 21:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B141: formatPacket(Packet*) (sender_threads.cpp:77)
-==2081==    by 0x10B36B: sendPacket(void*) (sender_threads.cpp:105)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B36B: sendPacket(void*) (sender_threads.cpp:105)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 1 errors in context 4 of 21:
-==2081== Thread 1:
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AFF8: createPacketPayloads(char*) (sender_threads.cpp:60)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==  Address 0x5804948 is 0 bytes after a block of size 6,605,064 alloc'd
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AF1A: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
-==2081==    by 0x10BA55: main (sender_threads.cpp:212)
-==2081==
-==2081==
-==2081== 136 errors in context 5 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x10B0E2: createPacketPayloads(char*) (sender_threads.cpp:67)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==  Address 0x5804948 is 0 bytes after a block of size 6,605,064 alloc'd
-==2081==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AF1A: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
-==2081==    by 0x10BA55: main (sender_threads.cpp:212)
-==2081==
-==2081==
-==2081== 1171 errors in context 6 of 21:
-==2081== Thread 3:
-==2081== Invalid write of size 1
-==2081==    at 0x483EC5E: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B1DB: formatPacket(Packet*) (sender_threads.cpp:80)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87bb is 3 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 1171 errors in context 7 of 21:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B141: formatPacket(Packet*) (sender_threads.cpp:77)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 1171 errors in context 8 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x483F0B2: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B4EC: sendPacket(void*) (sender_threads.cpp:124)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x4dd5808 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B096: createPacketPayloads(char*) (sender_threads.cpp:65)
-==2081==    by 0x10BA73: main (sender_threads.cpp:213)
-==2081==
-==2081==
-==2081== 1171 errors in context 9 of 21:
-==2081== Conditional jump or move depends on uninitialised value(s)
-==2081==    at 0x10B4B7: sendPacket(void*) (sender_threads.cpp:123)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Uninitialised value was created by a heap allocation
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10BAB2: main (sender_threads.cpp:215)
-==2081==
-==2081==
-==2081== 5913 errors in context 10 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x10AA4C: createChecksum(char*) (verification.h:23)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 5919 errors in context 11 of 21:
-==2081== Invalid write of size 1
-==2081==    at 0x483EC4C: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B1DB: formatPacket(Packet*) (sender_threads.cpp:80)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 7083 errors in context 12 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B245: formatPacket(Packet*) (sender_threads.cpp:84)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 7090 errors in context 13 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10A9BB: createChecksum(char*) (verification.h:12)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 7090 errors in context 14 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10A9A3: createChecksum(char*) (verification.h:11)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081==
-==2081== 9962081 errors in context 15 of 21:
-==2081== Invalid read of size 1
-==2081==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10AA17: createChecksum(char*) (verification.h:21)
-==2081==    by 0x10B1E7: formatPacket(Packet*) (sender_threads.cpp:81)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==  Address 0x5af87b8 is 0 bytes after a block of size 1,400 alloc'd
-==2081==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2081==    by 0x10B126: formatPacket(Packet*) (sender_threads.cpp:75)
-==2081==    by 0x10B523: sendPacket(void*) (sender_threads.cpp:127)
-==2081==    by 0x4BA6608: start_thread (pthread_create.c:477)
-==2081==    by 0x4CE0132: clone (clone.S:95)
-==2081==
-==2081== ERROR SUMMARY: 10000006 errors from 21 contexts (suppressed: 0 from 0)
+==979== Memcheck, a memory error detector
+==979== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==979== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==979== Command: ./custom_ftp_sender 10.0.1.135 51717 51718 hello.txt
+==979== Parent PID: 911
+==979==
+--979--
+--979-- Valgrind options:
+--979--    --leak-check=full
+--979--    --show-leak-kinds=all
+--979--    --track-origins=yes
+--979--    --verbose
+--979--    --log-file=valgrind-out.txt
+--979-- Contents of /proc/version:
+--979--   Linux version 5.15.0-1043-aws (buildd@lcy02-amd64-046) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #48~20.04.1-Ubuntu SMP Wed Aug 16 18:26:32 UTC 2023
+--979--
+--979-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--979-- Page sizes: currently 4096, max supported 4096
+--979-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--979-- Reading syms from /home/ubuntu/Server/custom_ftp_sender
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--979--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
+--979--   .. build-id is valid
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--979--    object doesn't have a symbol table
+--979--    object doesn't have a dynamic symbol table
+--979-- Scheduler: using generic scheduler lock implementation.
+--979-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==979== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-979-by-ubuntu-on-???
+==979== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-979-by-ubuntu-on-???
+==979== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-979-by-ubuntu-on-???
+==979==
+==979== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==979== don't want to do, unless you know exactly what you're doing,
+==979== or are doing some strange experiment):
+==979==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=979 ...command...
+==979==
+==979== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==979==   /path/to/gdb ./custom_ftp_sender
+==979== and then give GDB the following command
+==979==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=979
+==979== --pid is optional if only one valgrind process is running
+==979==
+--979-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--979-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--979--    object doesn't have a symbol table
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--979--    object doesn't have a symbol table
+==979== WARNING: new redirection conflicts with existing -- ignoring it
+--979--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--979--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--979-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--979-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+--979--    object doesn't have a symbol table
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/libm-2.31.so
+--979--   Considering /usr/lib/debug/.build-id/fe/91b4090ea04c1559ff71dd9290062776618891.debug ..
+--979--   .. build-id is valid
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+--979--    object doesn't have a symbol table
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+--979--   Considering /usr/lib/debug/.build-id/7b/4536f41cdaa5888408e82d0836e33dcf436466.debug ..
+--979--   .. build-id is valid
+--979-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--979--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
+--979--   .. build-id is valid
+--979-- REDIR: 0x4c62480 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61780 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c627b0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c610a0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c617e0 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c63c50 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7ece0 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7e820 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c625e0 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62410 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61710 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61150 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62540 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7e7e0 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61670 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61230 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62800 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c611d0 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7ff50 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7e860 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61820 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61100 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61630 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c6abb0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62850 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c623d0 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c7e930 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c61ae0 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c62750 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c626f0 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c63c90 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4c628a0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--979-- REDIR: 0x4d4a500 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--979-- REDIR: 0x4c5c0e0 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--979-- REDIR: 0x4d4a6d0 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+--979-- REDIR: 0x4d4d6e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48429f0 (memmove)
+--979-- REDIR: 0x4d46cc0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x48421e0 (bcmp)
+--979-- REDIR: 0x4d45bd0 (libc.so.6:__strcmp_avx2) redirected to 0x483fed0 (strcmp)
+--979-- REDIR: 0x4c61fa0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--979-- REDIR: 0x48fdb70 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x483c510 (operator new[](unsigned long))
+--979-- REDIR: 0x48fbd90 (libstdc++.so.6:operator delete[](void*)) redirected to 0x483d6e0 (operator delete[](void*))
+--979-- REDIR: 0x4c5c6d0 (libc.so.6:free) redirected to 0x483c9d0 (free)
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B035: createPacketPayloads(char*) (sender_threads.cpp:63)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AF1E: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
+==979==    by 0x10BA92: main (sender_threads.cpp:215)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x10B11F: createPacketPayloads(char*) (sender_threads.cpp:70)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==  Address 0x5805949 is 0 bytes after a block of size 6,605,065 alloc'd
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AF1E: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
+==979==    by 0x10BA92: main (sender_threads.cpp:215)
+==979==
+--979-- REDIR: 0x4d4a310 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--979-- REDIR: 0x4d4d6c0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
+--979-- REDIR: 0x4c5db10 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--979-- REDIR: 0x4d46530 (libc.so.6:__memchr_avx2) redirected to 0x4840050 (memchr)
+--979-- REDIR: 0x4d48720 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--979-- REDIR: 0x4d46010 (libc.so.6:__strncmp_avx2) redirected to 0x483f670 (strncmp)
+--979-- REDIR: 0x4d45960 (libc.so.6:__strpbrk_sse42) redirected to 0x4843da0 (strpbrk)
+--979-- REDIR: 0x4d4a0e0 (libc.so.6:__strchr_avx2) redirected to 0x483ebf0 (index)
+--979-- REDIR: 0x4d4db60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x48428e0 (memset)
+--979-- REDIR: 0x4d4bc10 (libc.so.6:__strcpy_avx2) redirected to 0x483f090 (strcpy)
+==979== Thread 3:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B17E: formatPacket(Packet*) (sender_threads.cpp:80)
+==979==    by 0x10B3A8: sendPacket(void*) (sender_threads.cpp:108)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B3A8: sendPacket(void*) (sender_threads.cpp:108)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+--979-- REDIR: 0x4d4ab90 (libc.so.6:__strcat_avx2) redirected to 0x483ec20 (strcat)
+--979-- REDIR: 0x48fdb10 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x483bdf0 (operator new(unsigned long))
+--979-- REDIR: 0x48fbd60 (libstdc++.so.6:operator delete(void*)) redirected to 0x483cf50 (operator delete(void*))
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B409: sendPacket(void*) (sender_threads.cpp:112)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979== Thread 2:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B816: receiveACK(void*) (sender_threads.cpp:171)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979== Thread 3:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B4F4: sendPacket(void*) (sender_threads.cpp:126)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x483F0B2: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B529: sendPacket(void*) (sender_threads.cpp:127)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x4dd6808 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B0D3: createPacketPayloads(char*) (sender_threads.cpp:68)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B17E: formatPacket(Packet*) (sender_threads.cpp:80)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid write of size 1
+==979==    at 0x483EC4C: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B218: formatPacket(Packet*) (sender_threads.cpp:83)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid write of size 1
+==979==    at 0x483EC5E: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B218: formatPacket(Packet*) (sender_threads.cpp:83)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97bb is 3 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10A9A3: createChecksum(char*) (verification.h:11)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10A9BB: createChecksum(char*) (verification.h:12)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AA17: createChecksum(char*) (verification.h:21)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x10AA4C: createChecksum(char*) (verification.h:23)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== Invalid read of size 1
+==979==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B282: formatPacket(Packet*) (sender_threads.cpp:87)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== More than 10000000 total errors detected.  I'm not reporting any more.
+==979== Final error counts will be inaccurate.  Go fix your program!
+==979== Rerun with --error-limit=no to disable this cutoff.  Note
+==979== that errors may occur in your program without prior warning from
+==979== Valgrind, because errors are no longer being displayed.
+==979==
+==979==
+==979== HEAP SUMMARY:
+==979==     in use at exit: 20,063,016 bytes in 9,446 blocks
+==979==   total heap usage: 9,465 allocs, 19 frees, 20,155,983 bytes allocated
+==979==
+==979== Searching for pointers to 9,446 not-freed blocks
+==979== Checked 30,360,872 bytes
+==979==
+==979== Thread 1:
+==979== 8 bytes in 1 blocks are still reachable in loss record 1 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BB83: main (sender_threads.cpp:221)
+==979==
+==979== 8 bytes in 1 blocks are still reachable in loss record 2 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BBB4: main (sender_threads.cpp:222)
+==979==
+==979== 179 bytes in 1 blocks are definitely lost in loss record 3 of 13
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x4C60F54: __libc_alloc_buffer_allocate (alloc_buffer_allocate.c:26)
+==979==    by 0x4D04628: alloc_buffer_allocate (alloc_buffer.h:143)
+==979==    by 0x4D04628: __resolv_conf_allocate (resolv_conf.c:411)
+==979==    by 0x4D01E21: __resolv_conf_load (res_init.c:592)
+==979==    by 0x4D04232: __resolv_conf_get_current (resolv_conf.c:163)
+==979==    by 0x4D023D4: __res_vinit (res_init.c:614)
+==979==    by 0x4D035CF: maybe_init (resolv_context.c:122)
+==979==    by 0x4D035CF: context_get (resolv_context.c:184)
+==979==    by 0x4D035CF: context_get (resolv_context.c:176)
+==979==    by 0x4D035CF: __resolv_context_get (resolv_context.c:195)
+==979==    by 0x4CF263F: gethostbyname (getXXbyYY.c:105)
+==979==    by 0x10BCDF: main (sender_threads.cpp:247)
+==979==
+==979== 288 bytes in 1 blocks are possibly lost in loss record 4 of 13
+==979==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x40149DA: allocate_dtv (dl-tls.c:286)
+==979==    by 0x40149DA: _dl_allocate_tls (dl-tls.c:532)
+==979==    by 0x4BA8322: allocate_stack (allocatestack.c:622)
+==979==    by 0x4BA8322: pthread_create@@GLIBC_2.2.5 (pthread_create.c:660)
+==979==    by 0x10BE6B: main (sender_threads.cpp:270)
+==979==
+==979== 288 bytes in 1 blocks are possibly lost in loss record 5 of 13
+==979==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x40149DA: allocate_dtv (dl-tls.c:286)
+==979==    by 0x40149DA: _dl_allocate_tls (dl-tls.c:532)
+==979==    by 0x4BA8322: allocate_stack (allocatestack.c:622)
+==979==    by 0x4BA8322: pthread_create@@GLIBC_2.2.5 (pthread_create.c:660)
+==979==    by 0x10BEB9: main (sender_threads.cpp:275)
+==979==
+==979== 1,400 bytes in 1 blocks are possibly lost in loss record 6 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== 1,400 bytes in 1 blocks are definitely lost in loss record 7 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B3A8: sendPacket(void*) (sender_threads.cpp:108)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== 18,876 bytes in 1 blocks are still reachable in loss record 8 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979== 37,744 bytes in 1 blocks are still reachable in loss record 9 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B094: createPacketPayloads(char*) (sender_threads.cpp:65)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==
+==979== 188,760 bytes in 1 blocks are still reachable in loss record 10 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BB2E: main (sender_threads.cpp:219)
+==979==
+==979== 6,603,800 bytes in 4,717 blocks are definitely lost in loss record 11 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== 6,605,065 bytes in 1 blocks are still reachable in loss record 12 of 13
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AF1E: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
+==979==    by 0x10BA92: main (sender_threads.cpp:215)
+==979==
+==979== 6,605,200 bytes in 4,718 blocks are still reachable in loss record 13 of 13
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B0D3: createPacketPayloads(char*) (sender_threads.cpp:68)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==
+==979== LEAK SUMMARY:
+==979==    definitely lost: 6,605,379 bytes in 4,719 blocks
+==979==    indirectly lost: 0 bytes in 0 blocks
+==979==      possibly lost: 1,976 bytes in 3 blocks
+==979==    still reachable: 13,455,661 bytes in 4,724 blocks
+==979==         suppressed: 0 bytes in 0 blocks
+==979==
+==979== ERROR SUMMARY: 10000006 errors from 21 contexts (suppressed: 0 from 0)
+==979==
+==979== 1 errors in context 1 of 21:
+==979== Thread 2:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B816: receiveACK(void*) (sender_threads.cpp:171)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979==
+==979== 1 errors in context 2 of 21:
+==979== Thread 3:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B409: sendPacket(void*) (sender_threads.cpp:112)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979==
+==979== 1 errors in context 3 of 21:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B17E: formatPacket(Packet*) (sender_threads.cpp:80)
+==979==    by 0x10B3A8: sendPacket(void*) (sender_threads.cpp:108)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B3A8: sendPacket(void*) (sender_threads.cpp:108)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 1 errors in context 4 of 21:
+==979== Thread 1:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B035: createPacketPayloads(char*) (sender_threads.cpp:63)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AF1E: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
+==979==    by 0x10BA92: main (sender_threads.cpp:215)
+==979==
+==979==
+==979== 135 errors in context 5 of 21:
+==979== Invalid read of size 1
+==979==    at 0x10B11F: createPacketPayloads(char*) (sender_threads.cpp:70)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==  Address 0x5805949 is 0 bytes after a block of size 6,605,065 alloc'd
+==979==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AF1E: readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char**) (sender_threads.cpp:47)
+==979==    by 0x10BA92: main (sender_threads.cpp:215)
+==979==
+==979==
+==979== 1171 errors in context 6 of 21:
+==979== Thread 3:
+==979== Invalid write of size 1
+==979==    at 0x483EC5E: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B218: formatPacket(Packet*) (sender_threads.cpp:83)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97bb is 3 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 1171 errors in context 7 of 21:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B17E: formatPacket(Packet*) (sender_threads.cpp:80)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 1171 errors in context 8 of 21:
+==979== Invalid read of size 1
+==979==    at 0x483F0B2: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B529: sendPacket(void*) (sender_threads.cpp:127)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x4dd6808 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B0D3: createPacketPayloads(char*) (sender_threads.cpp:68)
+==979==    by 0x10BAB0: main (sender_threads.cpp:216)
+==979==
+==979==
+==979== 1171 errors in context 9 of 21:
+==979== Conditional jump or move depends on uninitialised value(s)
+==979==    at 0x10B4F4: sendPacket(void*) (sender_threads.cpp:126)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Uninitialised value was created by a heap allocation
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10BAEF: main (sender_threads.cpp:218)
+==979==
+==979==
+==979== 5913 errors in context 10 of 21:
+==979== Invalid read of size 1
+==979==    at 0x10AA4C: createChecksum(char*) (verification.h:23)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 5919 errors in context 11 of 21:
+==979== Invalid write of size 1
+==979==    at 0x483EC4C: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B218: formatPacket(Packet*) (sender_threads.cpp:83)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 7083 errors in context 12 of 21:
+==979== Invalid read of size 1
+==979==    at 0x483EC52: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B282: formatPacket(Packet*) (sender_threads.cpp:87)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 7090 errors in context 13 of 21:
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10A9BB: createChecksum(char*) (verification.h:12)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 7090 errors in context 14 of 21:
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10A9A3: createChecksum(char*) (verification.h:11)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979==
+==979== 9962082 errors in context 15 of 21:
+==979== Invalid read of size 1
+==979==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10AA17: createChecksum(char*) (verification.h:21)
+==979==    by 0x10B224: formatPacket(Packet*) (sender_threads.cpp:84)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==  Address 0x5af97b8 is 0 bytes after a block of size 1,400 alloc'd
+==979==    at 0x483C583: operator new[](unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==979==    by 0x10B163: formatPacket(Packet*) (sender_threads.cpp:78)
+==979==    by 0x10B560: sendPacket(void*) (sender_threads.cpp:130)
+==979==    by 0x4BA7608: start_thread (pthread_create.c:477)
+==979==    by 0x4CE1132: clone (clone.S:95)
+==979==
+==979== ERROR SUMMARY: 10000006 errors from 21 contexts (suppressed: 0 from 0)
